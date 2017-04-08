@@ -22,3 +22,9 @@
 
 (/ a b)
 (/ b a)
+
+
+;list of lists
+(define l (permutations (list 1 2 3 4 5)))
+
+l
