@@ -3,6 +3,8 @@
 ;racker docs: https://docs.racket-lang.org/guide/index.html (1-4)
 ;iterations: https://docs.racket-lang.org/guide/for.html#%28part._for_and_for_%29
 
+;Ian's racket examples: https://github.com/theory-of-algorithms/example-scheme
+
 ;avaliable opperators:
 (define ops '(+-*/))
 
