@@ -16,33 +16,102 @@
 (define t 125)
 
 ;all possibilities for 2 numbers:
-(+ a b)
-(+ b a)
+;(+ a b)
+;(+ b a)
 
-(- a b)
-(- b a)
+;(- a b)
+;(- b a)
 
-(* a b)
-(* b a)
+;(* a b)
+;(* b a)
 
-(/ a b)
-(/ b a)
+;(/ a b)
+;(/ b a)
 
 
 ;list of lists
-(define l (permutations (list 1 2 3)))
+;(define l (permutations (list 1 2 3)))
 
-l
+;l
 
-ops
+;ops
 
-(cartesian-product '(l) '(ops))
+;(cartesian-product '(l) '(ops))
 
-(permutations '(+ 2 3))
+;(permutations '(+ 2 3))
 
 ;make permuation lists from all numbers and opperators.
-(permutations '(+ / * 1 2 3))
+;(permutations '(+ / * 1 2 3))
 
-;make a list of permuations
+
+
+
+;++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;make a list of all numbers and opperators.
+;(define testList (list + / * 1 2 3))  ; - Takes in opperators as '#<procedure:+>'
+
+;testList
+
+;make permuation lists from list of all numbers and opperators:
+
+;(define permList (permutations (testList))) ;- doesnt like testList being predefined! 
+
+;(define permList (permutations (define testList2 (list + / * 1 2 3))))  - Doesnt like list being defined here!
+;(define testList2 (list 1 2 3))
+
+;(define permList (permutations (list 1 2 3)))
+
+;permList
 
 ;grab each element from the list of lists, defined as their own lists.
+
+;(car permList)
+
+;(define firstList (car permList))
+
+;firstlist
+
+;(for ([i (in-list '(1 2 3))])
+; (display i))
+
+
+;(define z (list null))
+
+;(for ([i (in-list (list permList))])
+   ;(cons z i )
+  ; (display i))
+;z
+
+
+;++++++++++++++++++++++++++++
+;list holding numbers and opperators:
+(define originalList (list 1 3 + 5 7 - 9 11))
+
+originalList
+
+;create stack, holding first element of origianl list:
+(define stack (list (car originalList)))
+
+stack
+
+;create remaining list holding second to last elements of oiginal list:
+;(define remainingList (list (cdr originalList)))
+(define remainingList (cdr originalList))
+
+
+remainingList
+
+(car remainingList)
+
+;add once more to stack list, now using car of remaining list:
+(cons stack (car remainingList)) ;WRONG!! ahows as having added car to list here, but in print of stack its not there! 
+
+stack ; 
+;remainingList
+;take firsr element offirstList and put in the stack:
+;(cons stack (car originalList))
+
+
+;define (originalListMinusCar (cdr originalList))
+
+;++++++++++++++++++++++++++++
