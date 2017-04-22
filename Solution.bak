@@ -72,39 +72,44 @@
 ;firstlist
 
 ;(for ([i (in-list '(1 2 3))])
-; (display i))
+;(display i))
 
 
 ;(define z (list null))
 
 ;(for ([i (in-list (list permList))])
    ;(cons z i )
-  ; (display i))
+   ;(display i))
 ;z
 
 
 ;++++++++++++++++++++++++++++
 ;list holding numbers and opperators:
-(define originalList (list 1 3 + 5 7 - 9 11))
+(define originalList (list 1 3 '+ 5 7 '- 9 11))
 
+(print 'originalList:)
 originalList
 
 ;create stack, holding first element of origianl list:
 (define stack (list (car originalList)))
 
+(print 'stack:)
 stack
 
 ;create remaining list holding second to last elements of oiginal list:
 (define remainingList (cdr originalList))
 
-
+(print 'remainingList:)
 remainingList
 
+(print 'car_of_remainingList:)
 (car remainingList)
 
 ;add once more to stack list, now using car of remaining list:
+(print 'add_again_to_stack_list:)
 (cons stack (car remainingList)) ;WRONG!! ahows as having added car to list here, but in print of stack its not there! 
 
+(print 'stack:)
 stack
 ;remainingList
 ;take firsr element offirstList and put in the stack:

@@ -6,14 +6,14 @@
 ;Ian's racket examples: https://github.com/theory-of-algorithms/example-scheme
 
 ;avaliable opperators:
-(define ops '(+-*/))
+;(define ops '(+-*/))
 
 ;temp values for testing:
-(define a 5)
-(define b 25)
+;(define a 5)
+;(define b 25)
 
 ;target number:
-(define t 125)
+;(define t 125)
 
 ;all possibilities for 2 numbers:
 ;(+ a b)
@@ -84,38 +84,22 @@
 
 
 ;++++++++++++++++++++++++++++
-;list holding numbers and opperators:
-(define originalList (list 1 3 '+ 5 7 '- 9 11))
+;list holding opperators
+(define opperatorsList (list '+'-'*'/))
 
-(print 'originalList:)
-originalList
+;sample numbers
+(define numbersList (list 2 3 5))
 
-;create stack, holding first element of origianl list:
-(define stack (list (car originalList)))
+;sample target number
+(define sampleTarget 25)
 
-(print 'stack:)
-stack
+;get all combinations of opperators (in lists of 2 because numbers list has 3 elements, so 2 calculations required)
+(define combsofOppsList (combinations opperatorsList 2))
 
-;create remaining list holding second to last elements of oiginal list:
-(define remainingList (cdr originalList))
+;get permutations of the numbers
+(define permsOfNumbsList (permutations numbersList))
 
-(print 'remainingList:)
-remainingList
+;test print
+combsofOppsList
+permsOfNumbsList
 
-(print 'car_of_remainingList:)
-(car remainingList)
-
-;add once more to stack list, now using car of remaining list:
-(print 'add_again_to_stack_list:)
-(cons stack (car remainingList)) ;WRONG!! ahows as having added car to list here, but in print of stack its not there! 
-
-(print 'stack:)
-stack
-;remainingList
-;take firsr element offirstList and put in the stack:
-;(cons stack (car originalList))
-
-
-;define (originalListMinusCar (cdr originalList))
-
-;++++++++++++++++++++++++++++
