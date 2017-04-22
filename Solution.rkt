@@ -103,3 +103,9 @@
 combsofOppsList
 permsOfNumbsList
 
+;cartesian-product combines each pair of opperators with each permutation of numbers in a list of lists
+(define allOppsAndNumsList (cartesian-product permsOfNumbsList combsofOppsList))
+
+;test print
+allOppsAndNumsList
+
