@@ -74,6 +74,8 @@ allRPNResultsList
 ;flatten the results as they're in lists, to then retrieve the index of the element which equals the target answer
 (define indexOfCorrectAnswer (index-of (flatten allRPNResultsList) sampleTarget))
 
-;index is used to find the target RPN sum from the list
-(list-ref allRPNSumsList indexOfCorrectAnswer)
+;index is used to find the target RPN expression from the list
+(define correctAnswer (list-ref allRPNSumsList indexOfCorrectAnswer))
 
+;print calculation of correct answer
+(calculate-RPN correctAnswer)
