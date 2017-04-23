@@ -5,21 +5,17 @@
 
 ;Ian's racket examples: https://github.com/theory-of-algorithms/example-scheme
 
-
 ;list holding opperators
-;(define opperatorsList (list '+'-'*'/))
-(define opperatorsList (list '+ '+ '- '- '* '* '/ '/))
+(define opperatorsList (list '+ '+ '+ '+ '+ '- '- '- '- '- '* '* '* '* '* '/ '/ '/ '/ '/))
 
 ;sample numbers
-;(define numbersList (list 2 3 5))
-(define numbersList (list 3 7 21))
+(define numbersList (list 3 7 21 1 5 2))
 
 ;sample target number
-;(define sampleTarget 25)
-(define sampleTarget 210)
+(define sampleTarget 218)
 
-(define numberOfOpperators 2)
-(define numberOfNumbers 3)
+(define numberOfOpperators 5)
+(define numberOfNumbers 6)
 (define numberOfOppsandNumbs (+ numberOfOpperators numberOfNumbers))
 
 ;get all combinations of opperators (in lists of 2 because numbers list has 3 elements, so 2 calculations required)
@@ -45,9 +41,8 @@
 (define permsOfNumbsList (permutations numbersList))
 
 ;test print
-;combsofOppsList
-permsOfOppsList
-permsOfNumbsList
+;permsOfOppsList
+;permsOfNumbsList
 
 ;cartesian-product combines each pair of opperators with each permutation of numbers in a list of lists
 (define allOppsAndNumsList (cartesian-product permsOfNumbsList permsOfOppsList))
@@ -73,13 +68,11 @@ permsOfNumbsList
 ;test print
 ;allRPNSumsList
 
-
 ;the following algorithm takes a list of opperators and numbers and calculates them using RPN
 ;sourced from: https://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm#Racket
 
 (define (calculate-RPN expr)
   (for/fold ([stack '()]) ([token expr])
-    ;(printf "~a\t -> ~a~N" token stack)
     (match* (token stack)
      [((? number? n) s) (cons n s)]
      [('+ (list x y s ___)) (cons (+ x y) s)]
@@ -89,6 +82,17 @@ permsOfNumbsList
      [(x s) (error "calculate-RPN: Cannot calculate the expression:" 
                    (reverse (cons x s)))])))
 
+(define (calculate-RPN-with-print expr)
+  (for/fold ([stack '()]) ([token expr])
+    (printf "~a\t -> ~a~N" token stack)
+    (match* (token stack)
+     [((? number? n) s) (cons n s)]
+     [('+ (list x y s ___)) (cons (+ x y) s)]
+     [('- (list x y s ___)) (cons (- y x) s)]
+     [('* (list x y s ___)) (cons (* x y) s)]
+     [('/ (list x y s ___)) (cons (/ y (if (equal? x 0) 1 x)) s)] ;set denominator to 1 if 0
+     [(x s) (error "calculate-RPN: Cannot calculate the expression:" 
+                   (reverse (cons x s)))])))
 
 ;make list of results from each RPN sum (many of which are invalid)
 (define allRPNResultsList (map calculate-RPN allRPNSumsList))
@@ -103,7 +107,8 @@ permsOfNumbsList
 (define correctAnswer (list-ref allRPNSumsList indexOfCorrectAnswer))
 
 ;print calculation of correct answer
+(printf "Target Number: ") sampleTarget
 '---------------------
 'Answer:
 correctAnswer
-(calculate-RPN correctAnswer)
+(calculate-RPN-with-print correctAnswer)
