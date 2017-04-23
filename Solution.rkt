@@ -43,4 +43,32 @@ permsOfNumbsList
    (if (not (empty? lst))
        (cons (take lst n) (split-by (drop lst n) n))
        '() ))
-(split-by allOppsAndNumsFlattenedList 5)
+(define allRPNSumsList (split-by allOppsAndNumsFlattenedList 5))
+
+;test print
+allRPNSumsList
+
+
+;the following algorithm takes a list of opperators and numbers and calculates them using RPN
+;sourced from: https://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm#Racket
+
+(define (calculate-RPN expr)
+  (for/fold ([stack '()]) ([token expr])
+    (printf "~a\t -> ~a~N" token stack)
+    (match* (token stack)
+     [((? number? n) s) (cons n s)]
+     [('+ (list x y s ___)) (cons (+ x y) s)]
+     [('- (list x y s ___)) (cons (- y x) s)]
+     [('* (list x y s ___)) (cons (* x y) s)]
+     [('/ (list x y s ___)) (cons (/ y x) s)]
+     [(x s) (error "calculate-RPN: Cannot calculate the expression:" 
+                   (reverse (cons x s)))])))
+
+
+;make list of results from each RPN sum (many of which are invalid)
+(define allRPNResultsList (map calculate-RPN allRPNSumsList))
+
+;test print
+allRPNResultsList
+
+
