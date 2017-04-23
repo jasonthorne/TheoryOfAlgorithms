@@ -46,7 +46,7 @@ permsOfNumbsList
 (define allRPNSumsList (split-by allOppsAndNumsFlattenedList 5))
 
 ;test print
-allRPNSumsList
+;allRPNSumsList
 
 
 ;the following algorithm takes a list of opperators and numbers and calculates them using RPN
@@ -71,4 +71,9 @@ allRPNSumsList
 ;test print
 allRPNResultsList
 
+;flatten the results as they're in lists, to then retrieve the index of the element which equals the target answer
+(define indexOfCorrectAnswer (index-of (flatten allRPNResultsList) sampleTarget))
+
+;index is used to find the target RPN sum from the list
+(list-ref allRPNSumsList indexOfCorrectAnswer)
 
