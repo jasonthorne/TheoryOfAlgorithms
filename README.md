@@ -8,6 +8,10 @@ This is a program based on the famous [Countdown numbers game](https://en.wikipe
 It requires Racket Version 6.8 to run, found [here](https://racket-lang.org/download/). 
 To run, open Dr Racket and navigate: 'file' > 'open' > 'Solution.rkt'. 
 
+## Project development
+
+
+
 ## Known Issues:
 For the moment, the numbers and target are hardcoded. The intention however is to generate these just like the game of Countdown.
 
@@ -23,6 +27,10 @@ Because of the volume of calculations, there is a need to increase the memory fo
 Finally, it does not print the answers in strict RPN form.
 
 
+## Author 
+Jason Thorne 
+G00317349
 
-
+## Licence
+This project is licensed under the [MIT](https://github.com/jasonthorne/TheoryOfAlgorithms/blob/master/licence) License.
 
