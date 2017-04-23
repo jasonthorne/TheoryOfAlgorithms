@@ -7,26 +7,50 @@
 
 
 ;list holding opperators
-(define opperatorsList (list '+'-'*'/))
+;(define opperatorsList (list '+'-'*'/))
+(define opperatorsList (list '+ '+ '- '- '* '* '/ '/))
 
 ;sample numbers
-(define numbersList (list 2 3 5))
+;(define numbersList (list 2 3 5))
+(define numbersList (list 3 7 21))
 
 ;sample target number
-(define sampleTarget 25)
+;(define sampleTarget 25)
+(define sampleTarget 210)
+
+(define numberOfOpperators 2)
+(define numberOfNumbers 3)
+(define numberOfOppsandNumbs (+ numberOfOpperators numberOfNumbers))
 
 ;get all combinations of opperators (in lists of 2 because numbers list has 3 elements, so 2 calculations required)
-(define combsofOppsList (combinations opperatorsList 2))
+;(define combsofOppsList (combinations opperatorsList 2))
+(define combsofOppsList (remove-duplicates (combinations opperatorsList numberOfOpperators)))
+
+;get every permutation of each opperator, with duplicates removed. So (+ -) will add (- +) etc
+(define permsOfOppsList3d (map (lambda (ls) 
+       (remove-duplicates (permutations ls)))
+       combsofOppsList))
+
+;test print
+;permsOfOppsList3d
+
+;permsOfOppsList3d is a 3 dimensional list. Needs to be a list of lists for the cartesian-product calculation
+;sourced from: http://stackoverflow.com/a/20147937/1866373
+(define (flatten-once lst)
+  (apply append lst))
+
+(define permsOfOppsList (flatten-once permsOfOppsList3d)) 
 
 ;get permutations of the numbers
 (define permsOfNumbsList (permutations numbersList))
 
 ;test print
-combsofOppsList
+;combsofOppsList
+permsOfOppsList
 permsOfNumbsList
 
 ;cartesian-product combines each pair of opperators with each permutation of numbers in a list of lists
-(define allOppsAndNumsList (cartesian-product permsOfNumbsList combsofOppsList))
+(define allOppsAndNumsList (cartesian-product permsOfNumbsList permsOfOppsList))
 
 ;test print
 ;allOppsAndNumsList
@@ -43,7 +67,8 @@ permsOfNumbsList
    (if (not (empty? lst))
        (cons (take lst n) (split-by (drop lst n) n))
        '() ))
-(define allRPNSumsList (split-by allOppsAndNumsFlattenedList 5))
+(define allRPNSumsList (split-by allOppsAndNumsFlattenedList numberOfOppsandNumbs))
+;(define allRPNSumsList (split-by allOppsAndNumsFlattenedList 11))
 
 ;test print
 ;allRPNSumsList
@@ -54,13 +79,13 @@ permsOfNumbsList
 
 (define (calculate-RPN expr)
   (for/fold ([stack '()]) ([token expr])
-    (printf "~a\t -> ~a~N" token stack)
+    ;(printf "~a\t -> ~a~N" token stack)
     (match* (token stack)
      [((? number? n) s) (cons n s)]
      [('+ (list x y s ___)) (cons (+ x y) s)]
      [('- (list x y s ___)) (cons (- y x) s)]
      [('* (list x y s ___)) (cons (* x y) s)]
-     [('/ (list x y s ___)) (cons (/ y x) s)]
+     [('/ (list x y s ___)) (cons (/ y (if (equal? x 0) 1 x)) s)] ;set denominator to 1 if 0
      [(x s) (error "calculate-RPN: Cannot calculate the expression:" 
                    (reverse (cons x s)))])))
 
@@ -78,4 +103,7 @@ permsOfNumbsList
 (define correctAnswer (list-ref allRPNSumsList indexOfCorrectAnswer))
 
 ;print calculation of correct answer
+'---------------------
+'Answer:
+correctAnswer
 (calculate-RPN correctAnswer)
