@@ -5,85 +5,7 @@
 
 ;Ian's racket examples: https://github.com/theory-of-algorithms/example-scheme
 
-;avaliable opperators:
-;(define ops '(+-*/))
 
-;temp values for testing:
-;(define a 5)
-;(define b 25)
-
-;target number:
-;(define t 125)
-
-;all possibilities for 2 numbers:
-;(+ a b)
-;(+ b a)
-
-;(- a b)
-;(- b a)
-
-;(* a b)
-;(* b a)
-
-;(/ a b)
-;(/ b a)
-
-
-;list of lists
-;(define l (permutations (list 1 2 3)))
-
-;l
-
-;ops
-
-;(cartesian-product '(l) '(ops))
-
-;(permutations '(+ 2 3))
-
-;make permuation lists from all numbers and opperators.
-;(permutations '(+ / * 1 2 3))
-
-
-
-
-;++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;make a list of all numbers and opperators.
-;(define testList (list + / * 1 2 3))  ; - Takes in opperators as '#<procedure:+>'
-
-;testList
-
-;make permuation lists from list of all numbers and opperators:
-
-;(define permList (permutations (testList))) ;- doesnt like testList being predefined! 
-
-;(define permList (permutations (define testList2 (list + / * 1 2 3))))  - Doesnt like list being defined here!
-;(define testList2 (list 1 2 3))
-
-;(define permList (permutations (list 1 2 3)))
-
-;permList
-
-;grab each element from the list of lists, defined as their own lists.
-
-;(car permList)
-
-;(define firstList (car permList))
-
-;firstlist
-
-;(for ([i (in-list '(1 2 3))])
-;(display i))
-
-
-;(define z (list null))
-
-;(for ([i (in-list (list permList))])
-   ;(cons z i )
-   ;(display i))
-;z
-
-
-;++++++++++++++++++++++++++++
 ;list holding opperators
 (define opperatorsList (list '+'-'*'/))
 
@@ -107,5 +29,18 @@ permsOfNumbsList
 (define allOppsAndNumsList (cartesian-product permsOfNumbsList combsofOppsList))
 
 ;test print
-allOppsAndNumsList
+;allOppsAndNumsList
 
+;merge the numbers with opperators by flattening the list of lists into a single list
+(define allOppsAndNumsFlattenedList (flatten allOppsAndNumsList))
+
+;test print
+;allOppsAndNumsFlattenedList
+
+;grab 5 elmements at a time from the flattened list to make a list of every potential RPN sum
+;sourced from: http://stackoverflow.com/a/23394290/1866373
+(define (split-by lst n)
+   (if (not (empty? lst))
+       (cons (take lst n) (split-by (drop lst n) n))
+       '() ))
+(split-by allOppsAndNumsFlattenedList 5)
