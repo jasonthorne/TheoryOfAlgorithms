@@ -1,4 +1,4 @@
-# Theory Of Algorythms Project
+# Theory Of Algorithms Project
 
 ## Countdown Numbers Game
 
