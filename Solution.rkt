@@ -69,7 +69,7 @@ permsOfNumbsList
 (define allRPNResultsList (map calculate-RPN allRPNSumsList))
 
 ;test print
-allRPNResultsList
+;allRPNResultsList
 
 ;flatten the results as they're in lists, to then retrieve the index of the element which equals the target answer
 (define indexOfCorrectAnswer (index-of (flatten allRPNResultsList) sampleTarget))
