@@ -8,7 +8,7 @@ This is a program based on the famous [Countdown numbers game](https://en.wikipe
 It requires Racket Version 6.8 to run, found [here](https://racket-lang.org/download/). 
 To run, open Dr Racket and navigate: 'file' > 'open' > 'Solution.rkt'. 
 
-## Known Issues:
+## Known Issues
 For the moment, the numbers and target are hardcoded. The intention however is to generate these just like the game of Countdown.
 
 The solution is not as efficient as it could be:
