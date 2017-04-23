@@ -1,22 +1,29 @@
 #lang racket
 
-;racker docs: https://docs.racket-lang.org/guide/index.html (1-4)
-;iterations: https://docs.racket-lang.org/guide/for.html#%28part._for_and_for_%29
+;Theory of Algorithms
+;Countdown Numbers game
 
-;Ian's racket examples: https://github.com/theory-of-algorithms/example-scheme
+;Jason Thorne
+;G00317349
 
-;list holding opperators
-(define opperatorsList (list '+ '+ '+ '+ '+ '- '- '- '- '- '* '* '* '* '* '/ '/ '/ '/ '/))
+;list of numbers for generating six random numbers
+(define pickNumbersList (list 1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 25 50 75 100))
 
 ;sample numbers
 (define numbersList (list 3 7 21 1 5 2))
 
-;sample target number
-(define sampleTarget 218)
+;list holding opperators
+(define opperatorsList (list '+ '+ '+ '+ '+ '- '- '- '- '- '* '* '* '* '* '/ '/ '/ '/ '/))
+
+;randomly generated target number (between 101 and 999)
+;(define targetNumber (random 101 1000))
+(define targetNumber 218)
 
 (define numberOfOpperators 5)
 (define numberOfNumbers 6)
 (define numberOfOppsandNumbs (+ numberOfOpperators numberOfNumbers))
+
+'Calculating....
 
 ;get all combinations of opperators (in lists of 2 because numbers list has 3 elements, so 2 calculations required)
 ;(define combsofOppsList (combinations opperatorsList 2))
@@ -101,13 +108,13 @@
 ;allRPNResultsList
 
 ;flatten the results as they're in lists, to then retrieve the index of the element which equals the target answer
-(define indexOfCorrectAnswer (index-of (flatten allRPNResultsList) sampleTarget))
+(define indexOfCorrectAnswer (index-of (flatten allRPNResultsList) targetNumber))
 
 ;index is used to find the target RPN expression from the list
 (define correctAnswer (list-ref allRPNSumsList indexOfCorrectAnswer))
 
 ;print calculation of correct answer
-(printf "Target Number: ") sampleTarget
+(printf "Target Number: ") targetNumber
 '---------------------
 'Answer:
 correctAnswer
